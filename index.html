@@ -1,1 +1,88 @@
-davglass.github.com
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <title>DavGlass :: GitHub</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/2.5.1/build/reset-fonts-grids/reset-fonts-grids.css" type="text/css">
+    <link rel="stylesheet" href="http://blog.davglass.com/wp-content/themes/davglass/style.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="http://developer.yahoo.com/yui/assets/dpSyntaxHighlighter.css">    
+    <style type="text/css" media="screen">
+        p {
+            margin: 1em;
+        }
+        #projects li {
+            padding: 3px;
+        }
+        #projects li a {
+            text-decoration: none;
+            display: block;
+            border: 1px solid #ccc;
+            padding: .25em;
+            text-align: right;
+        }
+        #projects li a:hover {
+            background-color: #ccc;
+            color: black;
+        }
+	</style>
+</head>
+<body>
+<div id="davdoc" class="yui-t5">
+    <div id="hd"><h1 id="header"><a href="http://blog.davglass.com/">DavGlass :: GitHub</a></h1></div>
+    <div id="bd">
+
+        <div id="yui-main">
+            <div class="yui-b">
+                <div class="yui-g">
+                    <p>This is just a little page to show off some of my <a href="http://github.com/davglass/">GitHub Projects</a>.</p>
+                    <h2>Source for the Javascript on this page</h2>
+                    <textarea id="code" name="code" class="JScript">
+                    </textarea>
+                </div>
+            </div>
+        </div>
+        <div class="yui-b">
+            <h2>My GitHub Projects</h2>
+            <ul id="projects"></ul>
+        </div>
+
+
+    
+    </div>
+    <div id="ft">&nbsp;</div>
+</div>
+<script type="text/javascript" src="http://yui.yahooapis.com/3.0.0pr2/build/yui/yui-min.js"></script>
+<script src="http://developer.yahoo.com/yui/assets/dpSyntaxHighlighter.js"></script>
+<script type="text/javascript" id="script">
+(function() {
+
+    YUI().use('node', function(Y) {
+        
+        Y.get('#code').set('value', Y.get('#script').get('innerHTML'));
+        var limit = 20,        // how many repos to list
+            login = 'davglass', // your username
+            url = 'http://github.com/api/v1/json/' + login + '?callback=GH'; //The URL of the JSON request
+        
+        //Get the script
+        var obj = Y.Get.script(url);
+
+        //Callback used
+        GH = function(data) {
+            var repos = data.user.repositories;
+
+            repos.sort(function(a, b) {
+                return b.watchers - a.watchers
+            });
+
+            Y.each(repos.slice(0, limit), function(v, k) {
+                if (!v.fork) {
+                    Y.get('#projects').appendChild(Y.Node.create('<li><a href="' + v.url + '">' + v.name + '</a></li>'));
+                }
+            });
+        };
+        dp.SyntaxHighlighter.HighlightAll('code');
+    });
+    
+})();
+</script>
+</body>
+</html>
