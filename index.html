@@ -17,22 +17,20 @@
             display: block;
             border: 1px solid #ccc;
             padding: .25em;
+            padding-right: 20px;
             text-align: right;
+            background-image: url( http://github.com/images/icons/public.png );
+            background-repeat: no-repeat;
+            background-position: right 2px;
         }
         #projects li a:hover {
             background-color: #ccc;
             color: black;
         }
-        #forkme {
-            position: absolute;
-            top: 0;
-            left: 0;
-            border: 0;
-        }
 	</style>
 </head>
 <body>
-<a id="forkme" href="http://github.com/davglass/" title="Fork me on GitHub"><img src="http://s3.amazonaws.com/github/ribbons/forkme_left_gray_6d6d6d.png"></a>
+<a href="http://github.com/davglass"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub" /></a>
 <div id="davdoc" class="yui-t5">
     <div id="hd"><h1 id="header"><a href="http://blog.davglass.com/">DavGlass :: GitHub</a></h1></div>
     <div id="bd">
@@ -57,8 +55,8 @@
     </div>
     <div id="ft">&nbsp;</div>
 </div>
-<script type="text/javascript" src="http://yui.yahooapis.com/3.0.0pr2/build/yui/yui-min.js"></script>
 <script src="http://developer.yahoo.com/yui/assets/dpSyntaxHighlighter.js"></script>
+<script type="text/javascript" src="http://yui.yahooapis.com/3.0.0pr2/build/yui/yui-min.js"></script>
 <script type="text/javascript" id="script">
 (function() {
 
@@ -81,7 +79,7 @@
             });
 
             Y.each(repos.slice(0, limit), function(v, k) {
-                if (!v.fork) {
+                if (!v.fork && (v.name.indexOf('github.com') == -1)) {
                     Y.get('#projects').appendChild(Y.Node.create('<li><a href="' + v.url + '">' + v.name + '</a></li>'));
                 }
             });
