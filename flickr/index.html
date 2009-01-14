@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <title>Flickr Cameras</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/2.5.1/build/reset-fonts-grids/reset-fonts-grids.css" type="text/css">
+    <link rel="stylesheet" href="http://blog.davglass.com/wp-content/themes/davglass/style.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="http://developer.yahoo.com/yui/assets/dpSyntaxHighlighter.css">    
+    <style type="text/css" media="screen">
+        p {
+            margin: 1em;
+        }
+        #fetch {
+            border: 1px solid #ccc;
+            margin: 5px;
+            padding: 5px 20px;
+            cursor: pointer;
+        }
+        #fetch.go {
+            background-image: url( progress.gif );
+            background-repeat: no-repeat;
+            background-position: 3px 5px;
+        }
+	</style>
+</head>
+<body>
+<a href="http://github.com/davglass"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub" /></a>
+<div id="davdoc" class="yui-t5">
+    <div id="hd"><h1 id="header"><a href="http://blog.davglass.com/">Flickr Cameras</a></h1></div>
+    <div id="bd">
+
+        <div id="yui-main">
+            <div class="yui-b">
+                <div class="yui-g">
+                    <form method="get" action="index.html">
+                        UserID: <input type="text" id="user_id" value="94309252@N00"><br>
+                        # of photos: <input type="text" id="num_photos" value="100"><br>
+                        <button id="fetch"> Get Info </button>
+                    </form>
+                    <div id="status">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="yui-b">
+        </div>
+
+
+    
+    </div>
+    <div id="ft">&nbsp;</div>
+</div>
+<script src="http://developer.yahoo.com/yui/assets/dpSyntaxHighlighter.js"></script>
+<script type="text/javascript" src="http://yui.yahooapis.com/3.0.0pr2/build/yui/yui-min.js"></script>
+<script type="text/javascript" id="script">
+(function() {
+
+    YUI().use('node', function(Y) {
+        var inProgress = false;
+        Y.get('#fetch').on('click', function(e) {
+            e.halt();
+
+            var user_id = Y.get('#user_id').get('value'),
+                num_photos = Y.get('#num_photos').get('value');
+
+            var url = 'http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20flickr.photos.exif%20where%20photo_id%20in%20(select%20id%20from%20flickr.photos.search(0%2C' + num_photos + ')%20where%20user_id%3D%22' + user_id + '%22)&format=json&callback=camera';
+            
+            if (user_id && num_photos) {
+                inProgress = true;
+                this.set('disabled', true);
+                this.addClass('go');
+                var obj = Y.Get.script(url);
+            }
+        });
+        
+        camera = function(data) {
+            var stat = Y.get('#status'),
+                camData = null;
+            stat.set('innerHTML', '');
+
+            Y.get('#fetch').removeClass('go').set('disabled', false);
+            if (data.query.results) {
+                var len = data.query.results.photo.length,
+                    pics = data.query.results.photo;
+                for (var i = 0; i < len; i++) {
+                    if (pics[i].exif) {
+                        for (var o = 0; o < pics[i].exif.length; o++) {
+                            if (pics[i].exif[o].label == 'Model') {
+                                if (!camData) {
+                                    camData = {};
+                                }
+                                var mod = ucWords(pics[i].exif[o].raw.replace('DIGITAL CAMERA', ''));
+                                if (!camData[mod]) {
+                                    camData[mod] = 0;
+                                }
+                                camData[mod]++;
+                                var li = Y.Node.create('<li>' +  + '</li>');
+                            }
+                        }
+                    }
+                }
+                if (camData) {
+                    var ul = Y.Node.create('<ul>');
+                    for (var i in camData) {
+                        var li = Y.Node.create('<li>' + i + ' (' + camData[i] + ')</li>');
+                        ul.appendChild(li);
+                    }
+                    stat.appendChild(ul);
+                } else {
+                stat.set('innerHTML', '<strong>No Camera info found for query.</strong>')
+                }
+            } else {
+                stat.set('innerHTML', '<strong>An error occurred from YQL!</strong>')
+            }
+        };
+    });
+
+    var ucWords = function(str) {
+        return str.toLowerCase().replace(/\w+/g, function(s){
+          return s.charAt(0).toUpperCase() + s.substr(1);
+        });
+    };
+})();
+</script>
+</body>
+</html>
