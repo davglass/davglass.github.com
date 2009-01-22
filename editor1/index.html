@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.6.0/build/fonts/fonts-min.css" />
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.6.0/build/editor/assets/skins/sam/simpleeditor.css" />
+	<script type="text/javascript" src="http://yui.yahooapis.com/2.6.0/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+	<script type="text/javascript" src="http://yui.yahooapis.com/2.6.0/build/element/element-beta-min.js"></script>
+	<script type="text/javascript" src="http://yui.yahooapis.com/2.6.0/build/container/container_core-min.js"></script>
+	<script type="text/javascript" src="http://yui.yahooapis.com/2.6.0/build/editor/simpleeditor-debug.js"></script>
+
+</head>
+
+<body class=" yui-skin-sam">
+<h1>Simple Config - Works</h1>
+<form method="post" action="#" id="form1">
+<textarea id="ScreenContent1" name="ScreenContent1" rows="20" cols="75">
+	This is some more test text.
+</textarea>
+<h1>New config - Works</h1>
+<textarea id="ScreenContent2" name="ScreenContent2" rows="20" cols="75">
+	This is my second editor
+</textarea>
+<h1>Basic config - Works</h1>
+<textarea id="ScreenContent3" name="ScreenContent3" rows="20" cols="75">
+	This is my second editor
+</textarea>
+
+	<input type="submit" name="submit" value="submit" />
+</form>
+
+<script type="text/javascript">
+
+(function() {
+    var Dom = YAHOO.util.Dom,
+        Event = YAHOO.util.Event;
+    
+/*
+	this config fails to allow the user to select the font on the second editor
+*/
+var myConfigNoWork = { 
+	height: '115px', 
+	width: '650px', 
+	dompath: true, 
+	focusAtStart: false,
+	toolbar:{
+		buttons: [
+			{ 
+				group: 'fontstyle', 
+				label: 'Font Name and Size',
+				buttons: [
+					{
+						type: 'select', 
+						label: 'Arial', 
+						value: 'fontname', 
+						disabled: true,
+						menu: [
+							{ text: 'Arial', checked: true },
+							{ text: 'Arial Black' },
+							{ text: 'Comic Sans MS' },
+							{ text: 'Courier New' },
+							{ text: 'Lucida Console' },
+							{ text: 'Tahoma' },
+							{ text: 'Times New Roman' },
+							{ text: 'Trebuchet MS' },
+							{ text: 'Verdana' }
+							]
+					},
+					{ 
+						type: 'spin', 
+						label: '13', 
+						value: 'fontsize', 
+						range: [ 9, 75 ], 
+						disabled: true 
+					}
+				]
+			}
+		]
+	}
+};
+
+var myConfigNoWork2 = { 
+	height: '115px', 
+	width: '650px', 
+	dompath: true, 
+	focusAtStart: false,
+	toolbar:{
+		buttons: [
+			{ 
+				group: 'fontstyle', 
+				label: 'Font Name and Size',
+				buttons: [
+					{
+						type: 'select', 
+						label: 'Arial', 
+						value: 'fontname', 
+						disabled: true,
+						menu: [
+							{ text: 'Arial', checked: true },
+							{ text: 'Arial Black' },
+							{ text: 'Comic Sans MS' },
+							{ text: 'Courier New' },
+							{ text: 'Lucida Console' },
+							{ text: 'Tahoma' },
+							{ text: 'Times New Roman' },
+							{ text: 'Trebuchet MS' },
+							{ text: 'Verdana' }
+							]
+					},
+					{ 
+						type: 'spin', 
+						label: '13', 
+						value: 'fontsize', 
+						range: [ 9, 75 ], 
+						disabled: true 
+					}
+				]
+			}
+		]
+	}
+};
+
+
+/*
+	This following config works.
+*/
+    var myConfigWorks = { height: '300px', width: '600px', dompath: true, focusAtStart: true};
+
+    var myEditor1 = new YAHOO.widget.SimpleEditor('ScreenContent1', myConfigNoWork );
+    myEditor1._defaultToolbar.titlebar = '';
+    myEditor1.render();
+
+    var myEditor2 = new YAHOO.widget.SimpleEditor('ScreenContent2', myConfigNoWork2 );
+    myEditor2._defaultToolbar.titlebar = '';
+    myEditor2.render();
+
+    var myEditor3 = new YAHOO.widget.SimpleEditor('ScreenContent3', myConfigWorks);
+    myEditor3._defaultToolbar.titlebar = '';
+    myEditor3.render();
+})();
+</script>
+
+</body>
+
+</html>
