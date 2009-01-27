@@ -1,0 +1,334 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+ "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+
+<head>
+	<title>Collapse</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" href="default.css" type="text/css">
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.6.0/build/reset-fonts-grids/reset-fonts-grids.css"> 
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.6.0/build/resize/assets/skins/sam/resize.css"> 
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.6.0/build/layout/assets/skins/sam/layout.css"> 
+    <!-- Individual YUI JS files --> 
+    <script type="text/javascript" src="http://yui.yahooapis.com/2.6.0/build/yahoo-dom-event/yahoo-dom-event.js"></script> 
+    <script type="text/javascript" src="http://yui.yahooapis.com/2.6.0/build/animation/animation-min.js"></script> 
+    <script type="text/javascript" src="http://yui.yahooapis.com/2.6.0/build/element/element-beta-min.js"></script> 
+    <script type="text/javascript" src="http://yui.yahooapis.com/2.6.0/build/dragdrop/dragdrop-min.js"></script> 
+    <script type="text/javascript" src="http://yui.yahooapis.com/2.6.0/build/resize/resize-min.js"></script> 
+
+    <script type="text/javascript" src="http://yui.yahooapis.com/2.6.0/build/selector/selector-beta-min.js"></script>
+    <script type="text/javascript" src="http://yui.yahooapis.com/2.6.0/build/layout/layout-min.js"></script> 
+</head>
+
+
+<body>
+	<!-- Main div -->
+	<div id="doc3" class="yui-t2">
+    	<div id="hd">
+            <div id="head1">
+	            <div class="logo"></div>
+
+	            <div id="eval_msg" class="eval_msg"><b>Evaluation Account</b>: This account expires on:. To view pricing or activate this account please call or click  on the <i>Pricing and Activation</i> link below</div>
+				<div id="header_topright">
+					<span class="header_date"></span> | 
+		            
+		                <span class="logged_in_as">Logged in as <span class="logged_in_as_user">username</span></span>
+						 
+		            (<a href="./logoff.jsp">log off</a>)
+		            
+		            <p>company nme</p>
+
+				</div>
+			</div>
+			<div id="head2">
+	            
+	            <div id="nav">
+   <DIV ID="myMenuID"></DIV>
+
+
+
+<!-- new nav -->
+<ul id="qm0" class="qmmc">
+
+	<li><a href="./tasklist.jsp">Task List</a></li>
+	<li><a class="qmparent" href="./process_search.jsp">Search</a>
+
+		<ul>
+		<li><a href="./process_search.jsp">Search</a></li>
+
+		<li><a href="./show_active_delays.jsp">Active Delays</a></li>
+		<li><a href="./show_active_gates.jsp">Active Gates</a></li>
+		<li><a href="./process_overview.jsp">Dashboard</a></li>
+		<li><a href="./data_dump.jsp">Export</a></li>
+		</ul></li>
+
+	<li><a class="qmparent" href="./pref_main.jsp">Preferences</a>
+
+		<ul>
+		<li><a href="./reminders.jsp">Reminders</a></li>
+		<li><a href="./locale.jsp">Localization</a></li>
+		<li><a href="./v_main.jsp">Views</a></li>
+		<li><a href="./password.jsp">Password</a></li>
+		<li><a href="./proxy_edit.jsp">Proxies</a></li>
+
+		<li><a href="./rss_feed.jsp">RSS Feed</a></li>
+		</ul></li>
+
+	<li><a class="qmparent" href="./adminpage.jsp">Admin</a>
+
+		<ul>
+		<li><a href="./userlist.jsp">User</a></li>
+		<li><a href="./grouplist.jsp">Group</a></li>
+
+		<li><a href="./groupmap.jsp">Roles</a></li>
+		<li><a href="./dslist.jsp">Datasource</a></li>
+		<li><a href="./linklist.jsp">Links</a></li>
+		<li><a href="./companyerrorinfo.jsp">Notifications</a></li>
+		<li><a href="./add_company.jsp">Enroll Company</a></li>
+		<li><a href="./company_list.jsp">Company List</a></li>
+
+		<li><a href="./license.jsp">License</a></li>
+		<li><a href="./adminlogin.jsp">Admin Login</a></li>
+		<li><a href="./setsystemmessage.jsp">Set Message</a></li>
+		<li><a href="./admin_current_sessions.jsp">Dashboard</a></li>
+		</ul></li>
+
+	<li><a href="./helppage.jsp">Help</a></li>
+
+<li class="qmclear">&nbsp;</li></ul>
+
+	            <div id="bottom_nav"></div>
+			</div>
+		</div>
+		<div id="bd">
+			<div id="yui-main">
+			<div class="yui-b"><div class="yui-g"><div class="content">
+
+<!-- Auto Logoff after 28 minutes -->
+<meta http-equiv="REFRESH" content="3540; URL=./forcelogoff.jsp">
+
+
+
+<p>&nbsp;</p>
+
+
+	<h2>Change Password</h2>
+
+	
+	<form method="POST" action="password.jsp">
+	
+	  <table width="42%" border="0">
+	    <tr>
+	      <td class="defbody" width="52%">Original Password:</td>
+	      <td width="48%"><input type="password" name="orig_password"></td>
+	    </tr>
+	    <tr>
+	      <td class="defbody">New Password:</td>
+
+	      <td><input type="password" name="password1"></td>
+	    </tr>
+	    <tr>
+	      <td class="defbody">Confirm New Password:</td>
+	      <td><input type="password" name="password2"></td>
+	    </tr>
+	  </table>
+	  <p><input type="submit" value="Submit" name="B1"><input type="reset" value="Reset" name="B2"></p>
+
+	</form>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+    
+</div>
+</div>
+</div>
+	</div>
+	<div class="yui-b" id="navbar">
+<!-- left nav goes here -->
+
+			    
+
+
+
+<div class="sidebar">
+<div class="sidebar_header">
+	<a href="./dbscanlist.jsp"><B>Database Scan</B></A><br>
+
+
+        
+
+
+</div>
+
+                    <!-- LEFTNAV custom links -->
+                  		<ul id="sidebar_nav">
+                        
+                                        <li class="sidebar_nav"><a href="" target="_new1">Pricing and Activation</a></li>
+                                        
+                        
+                                        <li class="sidebar_nav"><a href="" target="_new1">  Workflow Tutorials</a></li>
+                                        
+                        
+                                        <li class="sidebar_nav"><a href="" target="_new1">Included Samples</a></li>
+                                        
+                        
+                                        <li class="sidebar_nav"><a href="" target="_new1">  Workflow Support</a></li>
+
+                                        
+                        
+                                        <li class="sidebar_nav"><a href="" target="_new1">Web Request Example</a></li>
+                                        
+                        
+                                        <li class="sidebar_nav"><a href="" target="_self">Create Support Incident</a></li>
+                                        
+                        
+
+                    </ul>
+
+
+<div class="sidebar_header"></div>
+
+
+
+
+
+                         <div class="sidebar_cat">Processes</div>
+
+                           <div id="details(0)">
+                           <ul id="sidebar_nav">
+
+                           </ul>
+                        </div>
+
+
+                         <div class="sidebar_cat">Samples: Sales</div>
+                           <div id="details(1)">
+                           <ul id="sidebar_nav">
+
+                            
+                                	<li class="sidebar_nav"><a href="./ccnew.jsp?CID=36330&AID=518875" class="mainlinks" onclick="return confirm('Are you sure you wish to start the process:Sub: Proposal Review?')">Sub: Proposal Review</a></li>
+                                       
+
+                            
+                                	<li class="sidebar_nav"><a href="./ccnew.jsp?CID=36331&AID=518886" class="mainlinks" onclick="return confirm('Are you sure you wish to start the process:Schedule On-Line Meeting?')">Schedule On-Line Meeting</a></li>
+                                       
+
+                            
+                                	<li class="sidebar_nav"><a href="./ccnew.jsp?CID=36331&AID=518898" class="mainlinks" onclick="return confirm('Are you sure you wish to start the process:SUB: Schedule On-Line Meeting?')">SUB: Schedule On-Line Meeting</a></li>
+                                       
+
+                            
+                                	<li class="sidebar_nav"><a href="./ccnew.jsp?CID=36332&AID=518902" class="mainlinks" onclick="return confirm('Are you sure you wish to start the process:New Prospect?')">New Prospect</a></li>
+                                       
+
+                            
+                                	<li class="sidebar_nav"><a href="./ccnew.jsp?CID=36332&AID=518933" class="mainlinks" onclick="return confirm('Are you sure you wish to start the process:SUB: From Web Request?')">SUB: From Web Request</a></li>
+                                       
+
+
+                           </ul>
+
+                        </div>
+
+
+                         <div class="sidebar_cat">Samples: Finance</div>
+                           <div id="details(2)">
+                           <ul id="sidebar_nav">
+                            
+                                	<li class="sidebar_nav"><a href="./ccnew.jsp?CID=36334&AID=518953" class="mainlinks" onclick="return confirm('Are you sure you wish to start the process:New Loan App?')">New Loan App</a></li>
+                                       
+
+                            
+                                	<li class="sidebar_nav"><a href="./ccnew.jsp?CID=36335&AID=518965" class="mainlinks" onclick="return confirm('Are you sure you wish to start the process:Report Daily Cash Receipts?')">Report Daily Cash Receipts</a></li>
+
+                                       
+
+                            
+                                	<li class="sidebar_nav"><a href="./ccnew.jsp?CID=36336&AID=518987" class="mainlinks" onclick="return confirm('Are you sure you wish to start the process:New Purchase Order?')">New Purchase Order</a></li>
+                                       
+
+
+                           </ul>
+                        </div>
+
+
+                         <div class="sidebar_cat">Samples: Reports</div>
+                           <div id="details(3)">
+                           <ul id="sidebar_nav">
+                            
+                                	<li class="sidebar_nav"><a href="./ccnew.jsp?CID=36337&AID=518991" class="mainlinks" onclick="return confirm('Are you sure you wish to start the process:Run Product Report?')">Run Product Report</a></li>
+
+                                       
+
+
+                           </ul>
+                        </div>
+
+
+                         <div class="sidebar_cat">Samples: Other</div>
+                           <div id="details(4)">
+                           <ul id="sidebar_nav">
+                            
+                                	<li class="sidebar_nav"><a href="./ccnew.jsp?CID=36328&AID=518852" class="mainlinks" onclick="return confirm('Are you sure you wish to start the process:New To-Do?')">New To-Do</a></li>
+                                       
+
+                            
+                                	<li class="sidebar_nav"><a href="./ccnew.jsp?CID=36329&AID=518858" class="mainlinks" onclick="return confirm('Are you sure you wish to start the process:New Worker?')">New Worker</a></li>
+
+                                       
+
+                            
+                                	<li class="sidebar_nav"><a href="./ccnew.jsp?CID=36339&AID=519033" class="mainlinks" onclick="return confirm('Are you sure you wish to start the process:  BPM Tour?')">  BPM Tour</a></li>
+                                       
+
+
+                           </ul>
+                        </div>
+
+
+                    
+
+        </div>
+
+             <!-- leftnav ends here -->
+
+
+         </div>
+   <div id="ft">footer text goes here</div>
+</div>
+</div>
+<script>
+
+(function() {
+    var Dom = YAHOO.util.Dom,
+        Event = YAHOO.util.Event;
+
+    Event.onDOMReady(function() {
+        var layout = new YAHOO.widget.Layout('doc3', {
+			height: Dom.getClientHeight(),
+			width: Dom.get('doc3').offsetWidth,
+			minHeight: 150,
+            units: [
+                
+                { position: 'top', height: 200, body: 'hd' }, 
+                { position: 'left', width: 160, body: 'navbar', grids: true, resize: true, gutter: '5px', collapse: true,  collapseSize: 50, scroll: true, animate: true },
+                { position: 'bottom', height: 25, body: 'ft' }, 
+	            { position: 'center', body: 'bd', grids: true } 
+            ]
+        });
+        
+        layout.on('beforeResize', function() { 
+        	Dom.setStyle('doc3', 'height', Dom.getClientHeight() + 'px'); 
+        })
+        
+        layout.render();
+        
+        Event.on(window, 'resize', layout.resize, layout, true); 
+    });
+
+
+})();
+
+</script>
+
+</body>
+</html>
