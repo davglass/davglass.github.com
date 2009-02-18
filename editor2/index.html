@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.6.0/build/fonts/fonts-min.css" />
+	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.6.0/build/editor/assets/skins/sam/simpleeditor.css" />
+	<script type="text/javascript" src="http://yui.yahooapis.com/2.6.0/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+	<script type="text/javascript" src="http://yui.yahooapis.com/2.6.0/build/element/element-beta-min.js"></script>
+	<script type="text/javascript" src="http://yui.yahooapis.com/2.6.0/build/container/container_core-min.js"></script>
+	<script type="text/javascript" src="http://yui.yahooapis.com/2.6.0/build/editor/simpleeditor-debug.js"></script>
+
+</head>
+
+<body class=" yui-skin-sam">
+<form method="post" action="#" id="form1">
+<textarea id="ScreenContent1" name="ScreenContent1" rows="20" cols="75">
+	This is some more test text.
+</textarea>
+</form>
+
+<script type="text/javascript">
+
+(function() {
+    var Dom = YAHOO.util.Dom,
+        Event = YAHOO.util.Event;
+    
+var myConfig = { 
+	height: '115px', 
+	width: '650px', 
+	dompath: true, 
+	focusAtStart: false
+};
+
+    var myEditor = new YAHOO.widget.SimpleEditor('ScreenContent1', myConfig );
+    myEditor.on('afterRender', function() {
+        myEditor.toolbar.collapse();
+    });
+    myEditor.render();
+
+})();
+</script>
+
+</body>
+
+</html>
