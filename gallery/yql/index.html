@@ -1,0 +1,37 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <title>Example</title>
+</head>
+<body class="yui-skin-sam">
+
+<p>YUI Gallery YQL example</p>
+
+<div id="res"></div>
+
+<script src="http://yui.yahooapis.com/3.0.0/build/yui/yui-min.js"></script>
+<script>
+YUI({
+    modules: {
+        'gallery-yql': {
+            fullpath: 'http://yui.yahooapis.com/gallery-2009.10.27/build/gallery-yql/gallery-yql-min.js',
+            requires: ["get","event-custom"],
+            optional: [],
+            supersedes: []
+        }
+    }
+}).use('node', 'gallery-yql', function(Y) {
+    var q2 = new Y.yql('select * from weather.forecast where location=62896'),
+    res = Y.one('#res');
+    q2.on('query', function(r) {
+        var el = Y.Node.create('<div class="mod"></div>');
+        el.set('innerHTML', '<h2>Weather for 62896</h2>' +
+            r.results.channel.item.description);
+        res.appendChild(el);
+        
+    });
+});
+</script>
+</body>
+</html>
+
