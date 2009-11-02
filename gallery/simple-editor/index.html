@@ -1,0 +1,45 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <title>SimpleEditor Example</title>
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.0r4/build/assets/skins/sam/skin.css">
+</head>
+<body class="yui-skin-sam">
+
+<h1>Simple Editor - Gallery</h1>
+
+<textarea id="editor"></textarea>
+
+<script src="http://yui.yahooapis.com/3.0.0/build/yui/yui-min.js"></script>
+<script>
+YUI({
+    modules: {
+        'gallery-simple-editor': {
+            fullpath: 'http://yui.yahooapis.com/gallery-2009.11.02-20/build/gallery-simple-editor/gallery-simple-editor-min.js',
+            requires: ["node","gallery-port","substitute"],
+            optional: [],
+            supersedes: []
+        },
+        'gallery-port': {
+            fullpath: 'http://yui.yahooapis.com/gallery-2009.11.02-20/build/gallery-port/gallery-port-min.js',
+            requires: ["base","node"],
+            optional: [],
+            supersedes: []
+        }        
+    }
+}).use('gallery-simple-editor', function(Y) {
+    var editor = new Y.Editor.Simple({
+        node: '#editor',
+        dompath: true,
+        height: '300px',
+        width: '530px',
+        handleSubmit: true,
+        extracss: 'body { font-size: 11px; }'
+    });
+    editor.render();
+
+});
+</script>
+</body>
+</html>
+
