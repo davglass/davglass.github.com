@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <title>SimpleEditor Example</title>
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.8.0r4/build/assets/skins/sam/skin.css">
+    <link rel="stylesheet" type="text/css" href="http://developer.yahoo.com/yui/assets/dpSyntaxHighlighter.css">
+    <style>
+        #res {
+            width: 400px;
+            border: 1px solid black;
+            padding: 1em;
+        }
+    </style>
+</head>
+<body class="yui-skin-sam">
+
+<h1>Gallery Loader</h1>
+
+<h2>YQL</h2>
+<div id="res"></div>
+
+
+<h2>Simple Editor</h2>
+<textarea id="editor"></textarea>
+
+<h2>The HTML</h2>
+<textarea class="HTML" name="code">
+<script src="http://yui.yahooapis.com/3.0.0/build/yui/yui-min.js"></script>
+<script src="http://yuilibrary.com/gallery/api/loader"></script>
+</textarea>
+
+
+<h2>The Javascript</h2>
+<textarea class="JScript" name="code">
+YUI(YUI_config).use('gallery-simple-editor', 'gallery-yql', function(Y) {
+
+    var q = new Y.yql('select * from weather.forecast where location=95014'),
+    res = Y.one('#res');
+    q.on('query', function(r) {
+        var el = Y.Node.create('<div class="mod"></div>');
+        el.set('innerHTML', '<h2>Weather for 95014</h2>' +
+            r.results.channel.item.description);
+        res.appendChild(el);
+        
+    });
+
+    var editor = new Y.Editor.Simple({
+        node: '#editor',
+        dompath: true,
+        height: '300px',
+        width: '530px',
+        handleSubmit: true,
+        extracss: 'body { font-size: 11px; }'
+    });
+    editor.render();
+
+});
+</textarea>
+
+<script src="http://developer.yahoo.com/yui/assets/dpSyntaxHighlighter.js"></script>
+<script src="http://yui.yahooapis.com/3.0.0/build/yui/yui-min.js"></script>
+<script src="http://yuilibrary.com/gallery/api/loader"></script>
+
+<script>
+YUI(YUI_config).use('gallery-simple-editor', 'gallery-yql', function(Y) {
+
+    var q = new Y.yql('select * from weather.forecast where location=95014'),
+    res = Y.one('#res');
+    q.on('query', function(r) {
+        var el = Y.Node.create('<div class="mod"></div>');
+        el.set('innerHTML', '<h2>Weather for 95014</h2>' +
+            r.results.channel.item.description);
+        res.appendChild(el);
+        
+    });
+
+    var editor = new Y.Editor.Simple({
+        node: '#editor',
+        dompath: true,
+        height: '300px',
+        width: '530px',
+        handleSubmit: true,
+        extracss: 'body { font-size: 11px; }'
+    });
+    editor.render();
+
+});
+
+dp.SyntaxHighlighter.HighlightAll('code');
+</script>
+</body>
+</html>
+
