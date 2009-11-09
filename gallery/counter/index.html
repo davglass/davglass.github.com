@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <title>Example</title>
+    <style>
+        textarea {
+            width: 400px;
+            height: 200px;
+        }
+        ul {
+            border: 1px solid #ccc;
+            background-color: #ddd;
+            width: 400px;
+            zoom: 1;
+            padding: 0;
+            margin: 0;
+            font-size: 65%;
+            font-family: Verdana;
+        }
+        ul:after { display: block; clear: both; visibility: hidden; content: '.'; height: 0;}
+        ul li {
+            display: inline;
+            float: left;
+            padding: 2px;
+            margin: 3px;
+            border: 1px solid #ccc;
+        }
+        ul li span {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="yui-skin-sam">
+
+<p>YUI Gallery Text Area Counter example</p>
+
+<textarea id="demo">Start Typing here.</textarea>
+<ul>
+    <li class="word">Word: <span></span></li>
+    <li class="char">Char: <span></span></li>
+    <li class="col">Col: <span></span></li>
+    <li class="row">Row: <span></span></li>
+</ul>
+
+
+<script src="http://yui.yahooapis.com/3.0.0/build/yui/yui-min.js"></script>
+<script>
+YUI({
+    modules: {
+        'gallery-textarea-counter': {
+            fullpath: 'http://yui.yahooapis.com/gallery-2009.11.09-19/build/gallery-textarea-counter/gallery-textarea-counter-min.js',
+            requires: ['node','event','base'],
+            optional: [],
+            supersedes: []
+        }
+    }
+}).use('gallery-textarea-counter', function(Y) {
+ 
+    var demo = Y.one('#demo');
+    demo.plug(Y.Plugin.Counter, {
+        wordsNode: 'ul li.word span',
+        charsNode: 'ul li.char span',
+        colsNode: 'ul li.col span',
+        rowsNode: 'ul li.row span'
+    });
+    demo.focus();
+
+
+});
+</script>
+</body>
+</html>
+
