@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <title>Example</title>
+    <style>
+        div.badge {
+            width: 200px;
+            border: 1px solid black;
+            background-color: #ccc;
+            font-size: 80%;
+            font-family: Verdana;
+            float: left;
+            margin: 2em;
+        }
+        div.badge a {
+            color: #000;
+        }
+        div.badge ul {
+            padding: 0;
+            margin: 0;
+            list-style-type: none;
+        }
+        div.badge ul li {
+        }
+        div.badge ul li a {
+            display: block;
+            border: 1px solid #ddd;
+            padding: 2px 0 2px 4px;
+            text-decoration: none;
+            margin: 2px;
+        }
+        div.badge ul li a:hover {
+            display: block;
+            border: 1px solid #000;
+            background-color: #ddd;
+        }
+        div.badge h2 {
+            font-size: 80%;
+            margin-left: 3px;
+        }
+    </style>
+</head>
+<body class="yui-skin-sam">
+
+<p>YUI Gallery Badge example</p>
+
+<div id="mine" class="badge"></div>
+<div id="popular" class="badge"></div>
+<div id="featured" class="badge"></div>
+
+<script src="http://yui.yahooapis.com/3.0.0/build/yui/yui-min.js"></script>
+<script>
+YUI({
+    modules: {
+        'gallery-badge': {
+            fullpath: 'http://yui.yahooapis.com/gallery-2009.11.09-19/build/gallery-badge/gallery-badge-min.js',
+            requires: ['node','event','gallery-yql', 'base'],
+            optional: [],
+            supersedes: []
+        },
+        'gallery-yql': {
+            fullpath: 'http://yui.yahooapis.com/gallery-2009.10.27/build/gallery-yql/gallery-yql-min.js',
+            requires: ['get','event-custom'],
+            optional: [],
+            supersedes: []
+      }
+ 
+    }
+}).use('gallery-badge', 'node-plugin', function(Y) {
+ 
+    //Simple Use Case
+    var node = Y.one('#mine');
+    node.plug(Y.Plugin.Badge, {
+        username: 'davglass'
+    });
+ 
+    var node = Y.one('#popular');
+    node.plug(Y.Plugin.Badge, {
+        type: 'popular'
+    });
+ 
+    var node = Y.one('#featured');
+    node.plug(Y.Plugin.Badge, {
+        type: 'featured'
+    });
+ 
+ 
+});
+</script>
+</body>
+</html>
+
