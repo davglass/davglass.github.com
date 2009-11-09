@@ -52,7 +52,8 @@ YUI({
                 item = Y.Node.create('<em></em>');
                 e.target.get('parentNode').append(item);
             }
-            item.set('innerHTML', r.shortUrl);
+            item.set('innerHTML', '<a href="' + r.shortUrl + '">' + r.shortUrl + '</a>');
+            Y.one('#expand').set('value', r.shortUrl);
             e.target.removeClass('send');
         });
     });
@@ -72,7 +73,8 @@ YUI({
                 item = Y.Node.create('<em></em>');
                 e.target.get('parentNode').append(item);
             }
-            item.set('innerHTML', r.longUrl);
+            item.set('innerHTML', '<a href="' + r.longUrl + '">' + r.longUrl + '</a>');
+            Y.one('#shorten').set('value', r.longUrl);
             e.target.removeClass('send');
         });
     });
