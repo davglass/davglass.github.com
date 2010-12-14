@@ -24,25 +24,15 @@
 <p><strong>Long URL:</strong> <input type="text" id="shorten" value="http://blog.davglass.com/"> <input type="button" id="do_shorten" value="Shorten" class="button"></p>
 <p><strong>Short URL:</strong> <input type="text" id="expand" value="http://bit.ly/1trR6f"> <input type="button" id="do_expand" value="Expand" class="button"></p>
 
-<script src="http://yui.yahooapis.com/3.0.0/build/yui/yui-min.js"></script>
+<script src="http://yui.yahooapis.com/3.2.0/build/yui/yui-min.js"></script>
 <script>
-YUI({
-    modules: {
-        'gallery-bitly': {
-            fullpath: 'http://yui.yahooapis.com/gallery-2009.11.09-19/build/gallery-bitly/gallery-bitly-min.js',
-            requires: ['base','get'],
-            optional: [],
-            supersedes: []
-      }
- 
-    }
-}).use('node', 'gallery-bitly', function(Y) {
+YUI().use('node', 'gallery-bitly', function(Y) {
  
     Y.one('#do_shorten').on('click', function(e) {
         e.target.addClass('send');
         var b = new Y.bitly({
             username: 'davglass',
-            key: 'R_6c177964b29afb4bd3e40e14c1531ced'
+            key: 'R_d2405255a50490af4394745edeb957f7'
         });
         b.shorten(Y.one('#shorten').get('value'), function(r) {
             var item = '';
@@ -63,7 +53,7 @@ YUI({
 
         var b = new Y.bitly({
             username: 'davglass',
-            key: 'R_6c177964b29afb4bd3e40e14c1531ced'
+            key: 'R_d2405255a50490af4394745edeb957f7'
         });
         b.expandByURL(Y.one('#expand').get('value'), function(r) {
             var item = '';
