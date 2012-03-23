@@ -3,16 +3,16 @@
 <head>
     <title>DavGlass :: GitHub</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/2.5.1/build/reset-fonts-grids/reset-fonts-grids.css" type="text/css">
-    <link rel="stylesheet" href="http://blog.davglass.com/wp-content/themes/davglass/style.css" type="text/css">
-    <link rel="stylesheet" type="text/css" href="http://developer.yahoo.com/yui/assets/dpSyntaxHighlighter.css">    
+    <link rel="stylesheet" href="http://new.davglass.com/wp-content/themes/davglass/style.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="http://yuilibrary.com/vendor/prettify/prettify-min.css">    
     <style type="text/css" media="screen">
         p {
             margin: 1em;
         }
-        #projects li {
+        #content li {
             padding: 3px;
         }
-        #projects li a {
+        #content li a {
             text-decoration: none;
             display: block;
             border: 1px solid #ccc;
@@ -23,7 +23,7 @@
             background-repeat: no-repeat;
             background-position: right 2px;
         }
-        #projects li a:hover {
+        #content li a:hover {
             background-color: #ccc;
             color: black;
         }
@@ -32,22 +32,24 @@
 <body>
 <a href="http://github.com/davglass"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub" /></a>
 <div id="davdoc" class="yui-t5">
-    <div id="hd"><h1 id="header"><a href="http://blog.davglass.com/">DavGlass :: GitHub</a></h1></div>
+    <div id="hd"><h1 id="header"><a href="http://new.davglass.com/">DavGlass :: GitHub</a></h1></div>
     <div id="bd">
 
         <div id="yui-main">
             <div class="yui-b">
                 <div class="yui-g">
                     <p>This is just a little page to show off some of my <a href="http://github.com/davglass/">GitHub Projects</a>.</p>
+                    <h2>Source for the Javascript Template on this page</h2>
+                    <pre id="example_template" class="code prettyprint">
+                    </pre>
+                    <br><br>
                     <h2>Source for the Javascript on this page</h2>
-                    <textarea id="code" name="code" class="JScript">
-                    </textarea>
+                    <pre id="example" class="code prettyprint">
+                    </pre>
                 </div>
             </div>
         </div>
-        <div class="yui-b">
-            <h2>My GitHub Projects</h2>
-            <ul id="projects"></ul>
+        <div class="yui-b" id="content">
         </div>
 
 
@@ -55,39 +57,49 @@
     </div>
     <div id="ft">&nbsp;</div>
 </div>
-<script src="http://developer.yahoo.com/yui/assets/dpSyntaxHighlighter.js"></script>
-<script type="text/javascript" src="http://yui.yahooapis.com/3.0.0pr2/build/yui/yui-min.js"></script>
+<script src="http://yuilibrary.com/vendor/prettify/prettify-min.js"></script>
+<script type="text/javascript" src="http://yui.yahooapis.com/3.5.0pr4/build/yui/yui-min.js"></script>
+<script id="list-template" type="text/x-handlebars-template">
+<h2>My GitHub Projects</h2>
+<ul>
+    {{#items}}
+        <li><a href="{{url}}">{{name}}</a></li>
+    {{/items}}
+</ul>
+</script>
 <script type="text/javascript" id="script">
-(function() {
+YUI().use('escape', 'jsonp', 'node', 'handlebars', function(Y) {
 
-    YUI().use('node', function(Y) {
-        
-        Y.get('#code').set('value', Y.get('#script').get('innerHTML'));
-        var limit = 20,        // how many repos to list
-            login = 'davglass', // your username
-            url = 'http://github.com/api/v1/json/' + login + '?callback=GH'; //The URL of the JSON request
-        
-        //Get the script
-        var obj = Y.Get.script(url);
+    var limit = 20, // how many repos to list
+        url = 'http://github.com/api/v1/json/davglass?callback={callback}', //The URL of the JSON request
+        final_repos = [], html,
+        source = Y.one('#list-template').get('text'),
+        template = Y.Handlebars.compile(source);
 
-        //Callback used
-        GH = function(data) {
-            var repos = data.user.repositories;
-
-            repos.sort(function(a, b) {
-                return b.watchers - a.watchers
-            });
-
-            Y.each(repos.slice(0, limit), function(v, k) {
-                if (!v.fork && (v.name.indexOf('github.com') == -1)) {
-                    Y.get('#projects').appendChild(Y.Node.create('<li><a href="' + v.url + '">' + v.name + '</a></li>'));
-                }
-            });
-        };
-        dp.SyntaxHighlighter.HighlightAll('code');
-    });
+    Y.one('#example').setContent(Y.Escape.html(Y.one('#script').get('text')));
+    Y.one('#example_template').setContent(Y.Escape.html(source));
     
-})();
+    Y.jsonp(url, function(data) {
+        var repos = data.user.repositories,
+            list = Y.one('#projects');
+
+        repos.sort(function(a, b) {
+            return b.watchers - a.watchers
+        });
+
+        Y.Array.each(repos.slice(0, limit), function(v, k) {
+            if (!v.fork && (v.name.indexOf('github.com') == -1)) {
+                final_repos.push(v);
+            }
+        });
+
+        html = template({ items: final_repos });
+
+        Y.one('#content').setContent(html);
+    });
+
+    prettyPrint();
+});
 </script>
 </body>
 </html>
